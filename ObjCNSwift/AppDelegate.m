@@ -18,13 +18,41 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:@[@"12", @"8", @"21", @"5", @"2", @"62", @"54"]];
+//    NSMutableArray *arr = [NSMutableArray arrayWithArray:@[@"12", @"8", @"21", @"5", @"2", @"62", @"54"]];
+//    int max = ((NSString*)arr.firstObject).intValue;
+//    int sorted = 0;
+//    do {
+//        sorted = 1;
+//        int max = ((NSString*)arr.firstObject).intValue;
+//        for (int i = 1; i<arr.count; i++)
+//        {
+//            int maxT = ((NSString*)[arr objectAtIndex:i]).intValue;
+//            if(max > maxT)
+//            {
+//                [arr replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d", max]];
+//                [arr replaceObjectAtIndex:i-1 withObject:[NSString stringWithFormat:@"%d", maxT]];
+//                sorted = 0;
+//            }
+//            else{
+//                max = maxT;
+//            }
+//        }
+//        NSLog(@"sorted: %d", sorted);
+//    } while (sorted == 0);
+    
+    //        optimized more than geeksforgeek
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:@[@"12", @"6", @"2", @"9", @"58",@"8", @"21", @"5", @"2", @"62", @"54"]];
     int max = ((NSString*)arr.firstObject).intValue;
+    int interInc = 0;
+    int outterInc = 0;
+    int lstCunt = (int)arr.count;
+    int timSwapped = 0;
     int sorted = 0;
     do {
         sorted = 1;
-        int max = ((NSString*)arr.firstObject).intValue;
-        for (int i = 1; i<arr.count; i++)
+        max = ((NSString*)arr.firstObject).intValue;
+        timSwapped = 0;
+        for (int i = 1; i<lstCunt; i++)
         {
             int maxT = ((NSString*)[arr objectAtIndex:i]).intValue;
             if(max > maxT)
@@ -32,13 +60,20 @@
                 [arr replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d", max]];
                 [arr replaceObjectAtIndex:i-1 withObject:[NSString stringWithFormat:@"%d", maxT]];
                 sorted = 0;
+                timSwapped++;
             }
             else{
                 max = maxT;
             }
+            interInc++;
         }
         NSLog(@"sorted: %d", sorted);
+        outterInc++;
+        lstCunt--;
+        if(timSwapped == 1)
+            break;
     } while (sorted == 0);
+    
     return YES;
 }
 
