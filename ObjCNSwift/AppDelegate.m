@@ -18,6 +18,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:@[@"12", @"8", @"21", @"5", @"2", @"62", @"54"]];
+    int max = ((NSString*)arr.firstObject).intValue;
+    int sorted = 0;
+    do {
+        sorted = 1;
+        int max = ((NSString*)arr.firstObject).intValue;
+        for (int i = 1; i<arr.count; i++)
+        {
+            int maxT = ((NSString*)[arr objectAtIndex:i]).intValue;
+            if(max > maxT)
+            {
+                [arr replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d", max]];
+                [arr replaceObjectAtIndex:i-1 withObject:[NSString stringWithFormat:@"%d", maxT]];
+                sorted = 0;
+            }
+            else{
+                max = maxT;
+            }
+        }
+        NSLog(@"sorted: %d", sorted);
+    } while (sorted == 0);
     return YES;
 }
 
